@@ -8,8 +8,10 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
   // Build the server for Vercel instead of the default Cloudflare target,
-  // since this project deploys to Vercel.
-  nitro: { preset: "vercel" },
+  // since this project deploys to Vercel. entryFormat "node" avoids a known
+  // Vercel+Nitro bug where the default "web" format breaks TanStack Start's
+  // request handling (https://github.com/TanStack/router/issues/6562).
+  nitro: { preset: "vercel", vercel: { entryFormat: "node" } },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
