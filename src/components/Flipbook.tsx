@@ -42,14 +42,18 @@ export const entries: FlipEntry[] = [
   { date: "ABCD", title: "ABCD", body: "ABCD", imageCaption: "ABCD" },
 ];
 
-// Second book — three images per page, each with its own text beside it.
-export const entriesTwo: FlipEntry[] = Array.from({ length: 6 }, () => ({
-  date: "ABCD",
-  title: "ABCD",
-  body: "ABCD",
-  images: [undefined, undefined, undefined],
-  imageCaptions: ["ABCD", "ABCD", "ABCD"],
-}));
+// Second book — one full, uncropped image per page.
+export const entriesTwo: FlipEntry[] = Array.from({ length: 20 }, (_, i) => {
+  const num = String(i + 1).padStart(2, "0");
+  const ext = i === 16 ? "jpg" : "png"; // firsts-17 is the only .jpg
+  return {
+    date: "",
+    title: "",
+    body: "",
+    images: [`/assets/book2/firsts-${num}.${ext}`],
+    imageCaptions: [undefined],
+  };
+});
 
 // Cover placeholders — edit these later.
 export const cover: FlipCover = {
@@ -65,7 +69,7 @@ export const coverTwo: FlipCover = {
 };
 
 export const jumpscareTwo: JumpscareConfig = {
-  pageIndex: 5,
+  pageIndex: 19,
   image: "/assets/book2/jumpscare.png",
   caption:
     "Madhzeepoour da munna dharampal yadav jumpscare 🥶🥶🥶🥶🥶🥶🥶🥶🥶1!!!!111!1!!!1",
@@ -261,12 +265,15 @@ function PhotoFrame({
   compact,
   tilt = 0,
   kawaii = false,
+  contain = false,
 }: {
   src?: string | undefined;
   caption?: string | undefined;
   compact?: boolean;
   tilt?: number;
   kawaii?: boolean;
+  /** Show the whole image without cropping, instead of filling a fixed box. */
+  contain?: boolean;
 }) {
   return (
     <figure className="animate-drift-in group flex flex-col">
@@ -285,8 +292,9 @@ function PhotoFrame({
         </span>
         <div
           className={
-            "flex aspect-4/3 items-center justify-center overflow-hidden border border-parchment-ink/25 " +
-            (kawaii ? "rounded-[1.35rem]" : "")
+            "flex items-center justify-center overflow-hidden border border-parchment-ink/25 " +
+            (contain ? "max-h-[65vh] w-full" : "aspect-4/3") +
+            (kawaii ? " rounded-[1.35rem]" : "")
           }
         >
           {src ? (
@@ -295,7 +303,10 @@ function PhotoFrame({
               alt={caption ?? ""}
               loading="lazy"
               className={
-                "h-full w-full object-cover transition-[filter] duration-700 " +
+                (contain
+                  ? "max-h-[65vh] w-auto max-w-full object-contain"
+                  : "h-full w-full object-cover") +
+                " transition-[filter] duration-700 " +
                 (kawaii
                   ? "[filter:saturate(1.1)]"
                   : "[filter:grayscale(1)_contrast(1.15)] group-hover:[filter:grayscale(0.35)_contrast(1.05)]")
@@ -498,7 +509,13 @@ function Page({
       )}
 
       {triple ? (
-        kawaii ? (
+        images.length <= 1 ? (
+          <div className="relative mt-4 flex flex-1 items-center justify-center">
+            <div className="w-full">
+              <PhotoFrame src={images[0]} caption={captions[0]} contain />
+            </div>
+          </div>
+        ) : kawaii ? (
           <div className="relative mt-4 flex flex-1 flex-col items-center justify-center gap-6">
             <div
               className="animate-float-soft w-[72%]"

@@ -24,9 +24,13 @@ export function Interlude({
         (kawaii ? "bg-kawaii-scene" : "bg-gothic-photo")
       }
     >
-      {kawaii ? null : <div className="vignette absolute inset-0" />}
-      <Scatter tone="fusion" count={18} />
-      <Embers count={20} soft />
+      {kawaii ? null : (
+        <>
+          <div className="vignette absolute inset-0" />
+          <Scatter tone="fusion" count={18} />
+          <Embers count={20} soft />
+        </>
+      )}
 
 
       <div className="animate-drift-in relative w-full max-w-2xl">
@@ -38,11 +42,13 @@ export function Interlude({
               : "border-blush/45 bg-background/70")
           }
         >
-          <CornerFiligree soft />
+          {kawaii ? null : <CornerFiligree soft />}
 
-          <div className="relative flex justify-center">
-            <Sigil soft />
-          </div>
+          {kawaii ? null : (
+            <div className="relative flex justify-center">
+              <Sigil soft />
+            </div>
+          )}
 
           <p
             className={
@@ -66,9 +72,11 @@ export function Interlude({
             {message}
           </h2>
 
-          <div className="mt-8">
-            <OrnateRule soft />
-          </div>
+          {kawaii ? null : (
+            <div className="mt-8">
+              <OrnateRule soft />
+            </div>
+          )}
 
           <div className="mt-10">
             <SealButton soft kawaii={kawaii} onClick={onContinue}>
