@@ -743,7 +743,7 @@ export function Flipbook({
     <section
       className={
         "relative min-h-screen px-4 py-24 " +
-        (kawaii ? "bg-kawaii-photo" : soft ? "bg-fusion-photo" : "bg-gothic-photo")
+        (kawaii ? "bg-kawaii-photo" : "bg-gothic-photo")
       }
     >
       {kawaii ? (
