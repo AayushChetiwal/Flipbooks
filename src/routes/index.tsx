@@ -10,6 +10,7 @@ import {
   jumpscareTwo,
 } from "@/components/Flipbook";
 import { Interlude } from "@/components/Interlude";
+import { EndingScreen } from "@/components/EndingScreen";
 import { BackgroundMusic } from "@/components/BackgroundMusic";
 
 const title = "A Little Trip — A Confession";
@@ -30,7 +31,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Stage = "gate" | "bookTwo" | "interludeTwo" | "bookThree";
+type Stage = "gate" | "bookTwo" | "interludeTwo" | "bookThree" | "finale";
 
 const GOTHIC_TRACK = "5Li93NPjT58";
 const KAWAII_TRACK = "xhBJ74j1d5I";
@@ -43,7 +44,7 @@ function Index() {
     ? null
     : stage === "bookTwo"
       ? GOTHIC_TRACK
-      : stage === "interludeTwo" || stage === "bookThree"
+      : stage === "interludeTwo" || stage === "bookThree" || stage === "finale"
         ? KAWAII_TRACK
         : null;
 
@@ -79,6 +80,14 @@ function Index() {
           variant="kawaii"
           eyebrow="part two"
           heading="You"
+          onFinish={() => setStage("finale")}
+        />
+      )}
+      {stage === "finale" && (
+        <EndingScreen
+          message="Well I hope you enjoyed what I whipped up in a month with my crappy webdev skills!! ...thanks for sticking till the end :DDD!!!."
+          buttonLabel="..Or....is it really the end?.."
+          redirectUrl="https://www.roblox.com"
         />
       )}
     </main>
