@@ -63,9 +63,10 @@ export const cover: FlipCover = {
 };
 
 export const coverTwo: FlipCover = {
-  title: "ABCD",
-  subtitle: "ABCD",
-  image: undefined,
+  title: "The First of Us",
+  subtitle:
+    "How our friendship began and our firsts, by god i swear i couldnt keep a straight face seeing some of these you were really crazy back then",
+  image: "/assets/book2/cover.png",
 };
 
 export const jumpscareTwo: JumpscareConfig = {
