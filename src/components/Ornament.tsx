@@ -50,7 +50,7 @@ export function OrnateRule({
 }) {
   const lineColor = kawaii ? "bg-blush/40" : "bg-primary/45";
   const textColor = kawaii ? "text-blush" : "text-primary";
-  const defaultLabel = kawaii ? "✝ ♡ ⚔ ♡ ✝" : soft ? "♰" : "✝ ⚔ ✝";
+  const defaultLabel = kawaii ? "♡" : soft ? "♰" : "✝ ⚔ ✝";
   return (
     <div className="flex items-center justify-center gap-3">
       <span className={`h-px w-16 ${lineColor} sm:w-24`} />

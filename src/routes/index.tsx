@@ -78,7 +78,7 @@ function Index() {
           cover={coverThree}
           variant="kawaii"
           eyebrow="part two"
-          heading="♡ ⋆ You ⋆ ♡"
+          heading="You"
         />
       )}
     </main>

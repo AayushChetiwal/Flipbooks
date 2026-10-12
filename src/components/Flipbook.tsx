@@ -254,9 +254,10 @@ export const entriesThree: FlipEntry[] = [
 ];
 
 export const coverThree: FlipCover = {
-  title: "ABCD",
-  subtitle: "ABCD",
-  image: undefined,
+  title: "The Book of Your Exquisite Taste",
+  subtitle:
+    "This is what I got to watch and enjoy because of your crazy taste, you turned me into a fucking weeb nga",
+  image: "/assets/book3/cover.png",
 };
 
 function PhotoFrame({
@@ -466,7 +467,7 @@ function Page({
         className={`${paper} relative flex min-h-[30rem] items-center justify-center p-8 ${kawaii ? "rounded-[2rem]" : ""}`}
       >
         <span className="text-carved animate-twinkle text-[0.55rem] text-parchment-ink/35">
-          ✝
+          {kawaii ? "♡" : "✝"}
         </span>
       </div>
     );

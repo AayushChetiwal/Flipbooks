@@ -2,7 +2,7 @@
  * Ambient drifting motes. Deterministic positions so SSR and client match.
  */
 const GLYPHS_DARK = ["✝", "⚔", "✞", "·", "✠"];
-const GLYPHS_SOFT = ["♡", "✝", "✧", "·", "❀"];
+const GLYPHS_SOFT = ["♡", "✧", "·", "❀", "☆"];
 const GLYPHS_FIRSTS = ["♰", "·", "✦", "·"];
 
 function rand(seed: number) {
