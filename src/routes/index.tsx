@@ -58,7 +58,7 @@ function Index() {
           cover={coverTwo}
           variant="triple"
           eyebrow="part one"
-          heading="♡ ⚔ Our Firsts ⚔ ♡"
+          heading="♰ Our Firsts ♰"
           onFinish={() => setStage("interludeTwo")}
           jumpscare={jumpscareTwo}
           onJumpscareChange={setJumpscareActive}

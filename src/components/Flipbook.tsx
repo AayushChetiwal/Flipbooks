@@ -497,13 +497,7 @@ function Page({
             {entry.date}
           </p>
           <p className="mt-2 text-[0.75rem] text-primary">
-            {triple ? (
-              <>
-                ✝ <span className="text-blush animate-twinkle inline-block">♡</span> ⚔
-              </>
-            ) : (
-              <>✝ ⚔ ✝</>
-            )}
+            {triple ? <>♰</> : <>✝ ⚔ ✝</>}
           </p>
         </header>
       )}
@@ -582,7 +576,7 @@ function Page({
             (flip ? "text-left" : "text-right")
           }
         >
-          {triple ? <span className="text-kawaii">♡ </span> : null}
+          {triple ? <span className="text-primary">♰ </span> : null}
           {index + 1}
         </span>
       )}
@@ -606,12 +600,12 @@ function Cover({
         (kawaii
           ? "rounded-[2.5rem] border-2 border-blush bg-kawaii-cream "
           : soft
-            ? "border-blush/40 bg-plum-black "
+            ? "border-primary/40 bg-plum-black "
             : "border-primary/60 bg-background ")
       }
     >
-      <CornerFiligree soft={soft} />
-      <Sigil soft={soft} />
+      <CornerFiligree soft={soft} kawaii={kawaii} />
+      <Sigil soft={soft} kawaii={kawaii} />
 
       <div
         className={
@@ -669,7 +663,7 @@ function Cover({
       </p>
 
       <div className="mt-8">
-        <OrnateRule soft={soft} />
+        <OrnateRule soft={soft} kawaii={kawaii} />
       </div>
     </div>
   );
@@ -772,11 +766,11 @@ export function Flipbook({
         tone={kawaii ? "kawaii" : soft ? "fusion" : "gothic"}
         count={kawaii ? 14 : soft ? 16 : 20}
       />
-      <Embers soft={soft} />
+      <Embers soft={soft} kawaii={kawaii} />
 
 
       <header className="animate-drift-in relative mx-auto max-w-3xl text-center">
-        <OrnateRule soft={soft} label={eyebrow} />
+        <OrnateRule soft={soft} kawaii={kawaii} label={eyebrow} />
         <h2
           className={
             kawaii
@@ -789,10 +783,6 @@ export function Flipbook({
       </header>
 
       <div className="book-perspective relative mx-auto mt-14 max-w-5xl">
-        {/* stacked page edges behind the book */}
-        <span className="absolute -left-2 top-3 h-[calc(100%-1.5rem)] w-2 bg-parchment/30" />
-        <span className="absolute -right-2 top-3 h-[calc(100%-1.5rem)] w-2 bg-parchment/30" />
-
         <div
           className={
             "preserve-3d relative border shadow-[0_40px_100px_-24px_oklch(0_0_0/0.95)] transition-all duration-500 " +
@@ -819,7 +809,7 @@ export function Flipbook({
                     (kawaii
                       ? "rounded-[2.5rem] border-2 border-blush bg-kawaii-cream"
                       : soft
-                        ? "border-blush/40 bg-plum-black"
+                        ? "border-primary/40 bg-plum-black"
                         : "border-primary/60 bg-background")
                   }
                 />
@@ -867,7 +857,7 @@ export function Flipbook({
               className={
                 "h-2 w-2 rotate-45 border transition-all duration-300 " +
                 (i === spread
-                  ? soft
+                  ? kawaii
                     ? "scale-125 border-blush bg-blush"
                     : "scale-125 border-primary bg-primary"
                   : "border-foreground/40 hover:border-primary")

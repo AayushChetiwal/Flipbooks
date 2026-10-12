@@ -3,6 +3,7 @@
  */
 const GLYPHS_DARK = ["✝", "⚔", "✞", "·", "✠"];
 const GLYPHS_SOFT = ["♡", "✝", "✧", "·", "❀"];
+const GLYPHS_FIRSTS = ["♰", "·", "✦", "·"];
 
 function rand(seed: number) {
   const h = Math.sin(seed * 127.1) * 43758.5453;
@@ -12,11 +13,13 @@ function rand(seed: number) {
 export function Embers({
   count = 18,
   soft = false,
+  kawaii = false,
 }: {
   count?: number;
   soft?: boolean;
+  kawaii?: boolean;
 }) {
-  const glyphs = soft ? GLYPHS_SOFT : GLYPHS_DARK;
+  const glyphs = kawaii ? GLYPHS_SOFT : soft ? GLYPHS_FIRSTS : GLYPHS_DARK;
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -30,7 +33,7 @@ export function Embers({
           <span
             key={i}
             className={`animate-rise absolute bottom-[-3rem] ${
-              soft ? "text-blush/45" : "text-primary/35"
+              kawaii ? "text-blush/45" : "text-primary/35"
             }`}
             style={{
               left: `${left}%`,

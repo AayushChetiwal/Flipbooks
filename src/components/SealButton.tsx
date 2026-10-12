@@ -25,7 +25,7 @@ export function SealButton({
         (kawaii
           ? "border-parchment-ink/50 bg-background/0 text-parchment-ink hover:bg-blush/30 "
           : soft
-            ? "border-blush/70 text-foreground hover:bg-blush/20 "
+            ? "border-primary/70 text-foreground hover:bg-primary/20 "
             : "border-primary text-foreground hover:bg-primary/20 ") +
         className
       }
@@ -36,25 +36,25 @@ export function SealButton({
           (kawaii
             ? "border-parchment-ink/35"
             : soft
-              ? "border-blush/50"
+              ? "border-primary/50"
               : "border-primary/60")
         }
       />
       <span className="sweep absolute inset-0 overflow-hidden" />
       <span
         className={
-          kawaii ? "text-parchment-ink" : soft ? "text-blush" : "text-primary"
+          kawaii ? "text-parchment-ink" : "text-primary"
         }
       >
-        {soft || kawaii ? "♡" : "✝"}
+        {kawaii ? "♡" : soft ? "♰" : "✝"}
       </span>
       <span className="relative">{children}</span>
       <span
         className={
-          kawaii ? "text-parchment-ink" : soft ? "text-blush" : "text-primary"
+          kawaii ? "text-parchment-ink" : "text-primary"
         }
       >
-        {soft || kawaii ? "♡" : "✝"}
+        {kawaii ? "♡" : soft ? "♰" : "✝"}
       </span>
     </button>
   );
