@@ -6,50 +6,31 @@ interface EndingScreenProps {
   buttonLabel: string;
   /** Where the "off" button sends the viewer, once the screen goes dark. */
   redirectUrl: string;
-}
-
-/** Synthesized "switch flipped" click — a short descending tone, no audio file needed. */
-function playLightsOff() {
-  try {
-    const AudioCtxCtor =
-      window.AudioContext ||
-      (window as unknown as { webkitAudioContext?: typeof AudioContext })
-        .webkitAudioContext;
-    if (!AudioCtxCtor) return;
-    const ctx = new AudioCtxCtor();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = "square";
-    osc.frequency.setValueAtTime(600, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.14);
-    gain.gain.setValueAtTime(0.4, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.2);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.22);
-  } catch {
-    // Sound is a nice-to-have, never block the redirect on it.
-  }
+  /** YouTube video id to play (muted-to-the-eye, audio-only) for the "lights off" sound. */
+  soundVideoId: string;
+  /** How long to let the sound effect play before redirecting, in ms. */
+  redirectDelayMs?: number;
 }
 
 /**
- * Closing kawaii interlude. Its button kills the lights (synthesized click +
- * a full-screen fade to black) before sending the viewer somewhere else.
+ * Closing kawaii interlude. Its button kills the lights (a "lights off"
+ * sound clip + a full-screen fade to black) before sending the viewer
+ * somewhere else.
  */
 export function EndingScreen({
   message,
   buttonLabel,
   redirectUrl,
+  soundVideoId,
+  redirectDelayMs = 2200,
 }: EndingScreenProps) {
   const [blackout, setBlackout] = useState(false);
 
   const handleClick = () => {
-    playLightsOff();
     setBlackout(true);
     window.setTimeout(() => {
       window.location.href = redirectUrl;
-    }, 900);
+    }, redirectDelayMs);
   };
 
   return (
@@ -67,6 +48,16 @@ export function EndingScreen({
           </div>
         </div>
       </div>
+
+      {blackout && (
+        <iframe
+          aria-hidden="true"
+          title="lights-off-audio"
+          className="pointer-events-none absolute h-px w-px opacity-0"
+          src={`https://www.youtube.com/embed/${soundVideoId}?autoplay=1&playsinline=1`}
+          allow="autoplay"
+        />
+      )}
 
       <div
         aria-hidden="true"

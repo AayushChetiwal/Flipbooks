@@ -34,7 +34,8 @@ export const Route = createFileRoute("/")({
 type Stage = "gate" | "bookTwo" | "interludeTwo" | "bookThree" | "finale";
 
 const GOTHIC_TRACK = "5Li93NPjT58";
-const KAWAII_TRACK = "xhBJ74j1d5I";
+const KAWAII_TRACK = "KmVAdJnFz1k";
+const LIGHTS_OFF_SOUND = "fiSXehAQLpU";
 
 function Index() {
   const [stage, setStage] = useState<Stage>("gate");
@@ -44,7 +45,7 @@ function Index() {
     ? null
     : stage === "bookTwo"
       ? GOTHIC_TRACK
-      : stage === "interludeTwo" || stage === "bookThree" || stage === "finale"
+      : stage === "bookThree" || stage === "finale"
         ? KAWAII_TRACK
         : null;
 
@@ -88,6 +89,7 @@ function Index() {
           message="Well I hope you enjoyed what I whipped up in a month with my crappy webdev skills!! ...thanks for sticking till the end :DDD!!!."
           buttonLabel="..Or....is it really the end?.."
           redirectUrl="https://www.roblox.com"
+          soundVideoId={LIGHTS_OFF_SOUND}
         />
       )}
     </main>
