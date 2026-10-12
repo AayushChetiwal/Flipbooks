@@ -79,7 +79,10 @@ export function BackgroundMusic({
 
     (async () => {
       if (!videoId) {
-        if (playerRef.current) ramp(100, 0, () => playerRef.current?.pauseVideo());
+        if (playerRef.current) {
+          ramp(100, 0, () => playerRef.current?.pauseVideo());
+        }
+        currentRef.current = null;
         return;
       }
 
@@ -114,6 +117,12 @@ export function BackgroundMusic({
       }
 
       if (currentRef.current === videoId) return;
+      // Nothing audible right now (we're paused/silent) — swap in immediately
+      // instead of fading out a track that isn't playing.
+      if (currentRef.current === null) {
+        swapTo(videoId);
+        return;
+      }
       ramp(100, 0, () => !cancelled && swapTo(videoId));
     })();
 
