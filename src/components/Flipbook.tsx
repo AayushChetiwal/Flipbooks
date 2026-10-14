@@ -129,9 +129,9 @@ export const entriesThree: FlipEntry[] = [
     title: "ABCD",
     body: "ABCD",
     images: [
-      "/assets/book3/img-13.webp",
+      undefined,
       "/assets/book3/img-14.webp",
-      "/assets/book3/img-15.jpg",
+      undefined,
     ],
     imageCaptions: [undefined, undefined, undefined],
   },
@@ -140,8 +140,8 @@ export const entriesThree: FlipEntry[] = [
     title: "ABCD",
     body: "ABCD",
     images: [
-      "/assets/book3/img-16.webp",
-      "/assets/book3/img-17.webp",
+      "/assets/book3/img-16.jpg",
+      "/assets/book3/img-17.jpg",
       "/assets/book3/img-18.webp",
     ],
     imageCaptions: [undefined, undefined, undefined],
@@ -164,7 +164,7 @@ export const entriesThree: FlipEntry[] = [
     images: [
       "/assets/book3/img-22.jpg",
       "/assets/book3/img-23.jpg",
-      "/assets/book3/img-24.jpg",
+      undefined,
     ],
     imageCaptions: [undefined, undefined, undefined],
   },
@@ -174,7 +174,7 @@ export const entriesThree: FlipEntry[] = [
     body: "ABCD",
     images: [
       "/assets/book3/img-25.jpg",
-      "/assets/book3/img-26.jpg",
+      undefined,
       "/assets/book3/img-27.jpg",
     ],
     imageCaptions: [undefined, undefined, undefined],
@@ -197,7 +197,7 @@ export const entriesThree: FlipEntry[] = [
     images: [
       "/assets/book3/img-31.jpg",
       "/assets/book3/img-32.jpg",
-      "/assets/book3/img-33.jpg",
+      undefined,
     ],
     imageCaptions: [undefined, undefined, undefined],
   },
@@ -206,7 +206,7 @@ export const entriesThree: FlipEntry[] = [
     title: "ABCD",
     body: "ABCD",
     images: [
-      "/assets/book3/img-34.jpg",
+      undefined,
       "/assets/book3/img-35.jpg",
       "/assets/book3/img-36.jpg",
     ],
@@ -218,7 +218,7 @@ export const entriesThree: FlipEntry[] = [
     body: "ABCD",
     images: [
       "/assets/book3/img-37.jpg",
-      "/assets/book3/img-38.jpg",
+      undefined,
       "/assets/book3/img-39.jpg",
     ],
     imageCaptions: [undefined, undefined, undefined],
@@ -228,9 +228,9 @@ export const entriesThree: FlipEntry[] = [
     title: "ABCD",
     body: "ABCD",
     images: [
-      "/assets/book3/img-40.jpg",
+      undefined,
       "/assets/book3/img-41.jpg",
-      "/assets/book3/img-42.jpg",
+      undefined,
     ],
     imageCaptions: [undefined, undefined, undefined],
   },
