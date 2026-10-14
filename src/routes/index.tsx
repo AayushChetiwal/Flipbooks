@@ -88,7 +88,7 @@ function Index() {
         <EndingScreen
           message="Well I hope you enjoyed what I whipped up in a month with my crappy webdev skills!! ...thanks for sticking till the end :DDD!!!."
           buttonLabel="..Or....is it really the end?.."
-          redirectUrl="https://www.roblox.com"
+          redirectUrl="https://transience.vercel.app"
           soundVideoId={LIGHTS_OFF_SOUND}
         />
       )}
