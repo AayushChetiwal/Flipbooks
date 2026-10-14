@@ -168,8 +168,8 @@ export const entriesThree: FlipEntry[] = [
     date: "ABCD",
     title: "ABCD",
     body: "ABCD",
-    images: ["/assets/book3/img-46.jpg", "/assets/book3/img-47.png"],
-    imageCaptions: [undefined, undefined],
+    images: ["/assets/book3/img-46.jpg", "/assets/book3/img-47.png", "/assets/book3/last.webp"],
+    imageCaptions: [undefined, undefined, undefined],
   }
 ];
 
