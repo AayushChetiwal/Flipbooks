@@ -305,7 +305,7 @@ function PhotoFrame({
               alt={caption ?? ""}
               loading="lazy"
               className={
-                (contain
+                (contain || kawaii
                   ? "h-auto max-h-[65vh] w-auto max-w-full object-contain"
                   : "h-full w-full object-cover") +
                 " transition-[filter] duration-700 " +
@@ -694,14 +694,12 @@ export function Flipbook({
 }: FlipbookProps) {
   const kawaii = variant === "kawaii";
   const soft = variant !== "single";
-  // spread 0 = cover, spread n = pages[(n-1)*2], pages[(n-1)*2 + 1]
-  const spreadCount = 1 + Math.ceil(pages.length / 2);
+  // Page 0 is the cover; each following step displays exactly one entry.
+  const spreadCount = 1 + pages.length;
   const [spread, setSpread] = useState(0);
   const [turn, setTurn] = useState<"none" | "next" | "prev">("none");
   const [jumpscareDismissed, setJumpscareDismissed] = useState(false);
-  const jumpscareSpread = jumpscare
-    ? Math.floor(jumpscare.pageIndex / 2) + 1
-    : -1;
+  const jumpscareSpread = jumpscare ? jumpscare.pageIndex + 1 : -1;
   const jumpscareShowing =
     !!jumpscare && !jumpscareDismissed && spread === jumpscareSpread;
 
@@ -750,7 +748,7 @@ export function Flipbook({
     return () => window.removeEventListener("keydown", onKey);
   }, [go]);
 
-  const left = spread > 0 ? (spread - 1) * 2 : -1;
+  const pageIndex = spread - 1;
 
   return (
     <section
@@ -784,7 +782,7 @@ export function Flipbook({
         </h2>
       </header>
 
-      <div className="book-perspective relative mx-auto mt-14 max-w-5xl">
+      <div className="book-perspective relative mx-auto mt-14 w-full max-w-2xl min-w-0">
         <div
           className={
             "preserve-3d relative min-w-0 border shadow-[0_40px_100px_-24px_oklch(0_0_0/0.95)] transition-all duration-500 " +
@@ -801,52 +799,19 @@ export function Flipbook({
           {/* ribbon bookmark */}
           <span className="pointer-events-none absolute -top-4 right-10 z-10 h-16 w-4 bg-primary/85 shadow-[0_6px_14px_-6px_oklch(0_0_0/0.9)] after:absolute after:bottom-[-0.5rem] after:h-0 after:w-full after:border-x-8 after:border-t-8 after:border-x-transparent after:border-t-primary/85 after:content-['']" />
 
-          <div className={"relative grid min-w-0 " + (soft && !kawaii ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-2")}>
+          <div className="relative grid min-w-0 grid-cols-1">
             {spread === 0 ? (
-              <>
-                <Cover data={coverData} soft={soft} kawaii={kawaii} />
-                <div
-                  className={
-                    "hidden min-h-[30rem] border sm:block " +
-                    (kawaii
-                      ? "rounded-[2.5rem] border-2 border-blush bg-kawaii-cream"
-                      : soft
-                        ? "border-primary/40 bg-plum-black"
-                        : "border-primary/60 bg-background")
-                  }
-                />
-              </>
+              <Cover data={coverData} soft={soft} kawaii={kawaii} />
             ) : (
-              <>
-                <div className={"relative min-w-0 " + (soft && !kawaii ? "border-b border-parchment-ink/30 sm:border-b-0 sm:border-r" : "border-r border-parchment-ink/30")}>
-                  <Page entry={pages[left]} index={left} variant={variant} />
-                  {jumpscare && jumpscare.pageIndex === left && jumpscareShowing ? (
-                    <JumpscareOverlay
-                      config={jumpscare}
-                      onDismiss={handleJumpscareDismiss}
-                    />
-                  ) : null}
-                </div>
-                <div className="relative min-w-0">
-                  <Page
-                    entry={pages[left + 1]}
-                    index={left + 1}
-                    variant={variant}
+              <div className="relative min-w-0">
+                <Page entry={pages[pageIndex]} index={pageIndex} variant={variant} />
+                {jumpscare && jumpscare.pageIndex === pageIndex && jumpscareShowing ? (
+                  <JumpscareOverlay
+                    config={jumpscare}
+                    onDismiss={handleJumpscareDismiss}
                   />
-                  {jumpscare &&
-                  jumpscare.pageIndex === left + 1 &&
-                  jumpscareShowing ? (
-                    <JumpscareOverlay
-                      config={jumpscare}
-                      onDismiss={handleJumpscareDismiss}
-                    />
-                  ) : null}
-                </div>
-                {/* centre gutter shadow */}
-                {!(soft && !kawaii) ? (
-                  <span className="book-gutter pointer-events-none absolute inset-y-0 left-1/2 w-16 -translate-x-1/2" />
                 ) : null}
-              </>
+              </div>
             )}
           </div>
         </div>
