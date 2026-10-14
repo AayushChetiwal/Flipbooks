@@ -278,7 +278,7 @@ function PhotoFrame({
   contain?: boolean;
 }) {
   return (
-    <figure className="animate-drift-in group flex flex-col">
+    <figure className="animate-drift-in group flex w-full min-w-0 flex-col">
       <div
         className={
           "relative border border-parchment-ink/45 bg-parchment/25 p-1.5 shadow-[0_10px_24px_-14px_oklch(0_0_0/0.8)] transition-transform duration-500 group-hover:rotate-0 group-hover:scale-[1.04] " +
@@ -306,7 +306,7 @@ function PhotoFrame({
               loading="lazy"
               className={
                 (contain
-                  ? "max-h-[65vh] w-auto max-w-full object-contain"
+                  ? "h-auto max-h-[65vh] w-auto max-w-full object-contain"
                   : "h-full w-full object-cover") +
                 " transition-[filter] duration-700 " +
                 (kawaii
@@ -598,7 +598,7 @@ function Cover({
   return (
     <div
       className={
-        "animate-drift-in relative flex min-h-[30rem] flex-col items-center justify-center border p-10 text-center " +
+        "animate-drift-in relative flex min-h-[30rem] min-w-0 flex-col items-center justify-center border p-5 sm:p-10 text-center " +
         (kawaii
           ? "rounded-[2.5rem] border-2 border-blush bg-kawaii-cream "
           : soft
@@ -611,7 +611,7 @@ function Cover({
 
       <div
         className={
-          "mt-8 flex aspect-4/3 w-56 items-center justify-center border " +
+          "mt-8 flex aspect-4/3 w-56 max-w-full items-center justify-center border " +
         (kawaii
           ? "rounded-[1.75rem] border-2 border-blush/80 "
           : "border-foreground/40 ") +
@@ -624,7 +624,7 @@ function Cover({
             src={data.image}
             alt={data.title}
             className={
-              "h-full w-full object-cover " +
+              (soft && !kawaii ? "h-full w-full object-contain" : "h-full w-full object-cover") +
               (kawaii ? "" : "[filter:grayscale(1)]")
             }
           />
@@ -787,7 +787,7 @@ export function Flipbook({
       <div className="book-perspective relative mx-auto mt-14 max-w-5xl">
         <div
           className={
-            "preserve-3d relative border shadow-[0_40px_100px_-24px_oklch(0_0_0/0.95)] transition-all duration-500 " +
+            "preserve-3d relative min-w-0 border shadow-[0_40px_100px_-24px_oklch(0_0_0/0.95)] transition-all duration-500 " +
             (kawaii
               ? "rounded-[2.75rem] border-2 border-blush overflow-hidden "
               : "border-primary ") +
@@ -801,13 +801,13 @@ export function Flipbook({
           {/* ribbon bookmark */}
           <span className="pointer-events-none absolute -top-4 right-10 z-10 h-16 w-4 bg-primary/85 shadow-[0_6px_14px_-6px_oklch(0_0_0/0.9)] after:absolute after:bottom-[-0.5rem] after:h-0 after:w-full after:border-x-8 after:border-t-8 after:border-x-transparent after:border-t-primary/85 after:content-['']" />
 
-          <div className="relative grid grid-cols-2">
+          <div className={"relative grid min-w-0 " + (soft && !kawaii ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-2")}>
             {spread === 0 ? (
               <>
                 <Cover data={coverData} soft={soft} kawaii={kawaii} />
                 <div
                   className={
-                    "min-h-[30rem] border " +
+                    "hidden min-h-[30rem] border sm:block " +
                     (kawaii
                       ? "rounded-[2.5rem] border-2 border-blush bg-kawaii-cream"
                       : soft
@@ -818,7 +818,7 @@ export function Flipbook({
               </>
             ) : (
               <>
-                <div className="relative border-r border-parchment-ink/30">
+                <div className={"relative min-w-0 " + (soft && !kawaii ? "border-b border-parchment-ink/30 sm:border-b-0 sm:border-r" : "border-r border-parchment-ink/30")}>
                   <Page entry={pages[left]} index={left} variant={variant} />
                   {jumpscare && jumpscare.pageIndex === left && jumpscareShowing ? (
                     <JumpscareOverlay
@@ -827,7 +827,7 @@ export function Flipbook({
                     />
                   ) : null}
                 </div>
-                <div className="relative">
+                <div className="relative min-w-0">
                   <Page
                     entry={pages[left + 1]}
                     index={left + 1}
@@ -843,7 +843,9 @@ export function Flipbook({
                   ) : null}
                 </div>
                 {/* centre gutter shadow */}
-                <span className="book-gutter pointer-events-none absolute inset-y-0 left-1/2 w-16 -translate-x-1/2" />
+                {!(soft && !kawaii) ? (
+                  <span className="book-gutter pointer-events-none absolute inset-y-0 left-1/2 w-16 -translate-x-1/2" />
+                ) : null}
               </>
             )}
           </div>
