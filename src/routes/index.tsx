@@ -34,8 +34,8 @@ export const Route = createFileRoute("/")({
 type Stage = "gate" | "bookTwo" | "interludeTwo" | "bookThree" | "finale";
 
 const GOTHIC_TRACK = "5Li93NPjT58";
-const KAWAII_TRACK = "KmVAdJnFz1k";
-const LIGHTS_OFF_SOUND = "YZ47NcSP0o4";
+const KAWAII_TRACK = "xhBJ74j1d5I";
+const LIGHTS_OFF_SOUND = "gOLB0kWxJak";
 
 function Index() {
   const [stage, setStage] = useState<Stage>("gate");
