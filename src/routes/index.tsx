@@ -96,5 +96,3 @@ function Index() {
   );
 }
 
-const track =
-  jumpscareActive && stage === "bookTwo" ? null : ...
