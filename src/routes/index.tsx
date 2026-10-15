@@ -13,9 +13,9 @@ import { Interlude } from "@/components/Interlude";
 import { EndingScreen } from "@/components/EndingScreen";
 import { BackgroundMusic } from "@/components/BackgroundMusic";
 
-const title = "A Little Trip — A Confession";
+const title = "A Little Trip";
 const description =
-  "A four-part confession that begins in candlelit gothic dark and slowly turns soft and sweet.";
+  "";
 
 export const Route = createFileRoute("/")({
   head: () => ({
