@@ -35,7 +35,7 @@ type Stage = "gate" | "bookTwo" | "interludeTwo" | "bookThree" | "finale";
 
 const GOTHIC_TRACK = "5Li93NPjT58";
 const KAWAII_TRACK = "KmVAdJnFz1k";
-const LIGHTS_OFF_SOUND = "fiSXehAQLpU";
+const LIGHTS_OFF_SOUND = "YZ47NcSP0o4";
 
 function Index() {
   const [stage, setStage] = useState<Stage>("gate");
@@ -95,3 +95,6 @@ function Index() {
     </main>
   );
 }
+
+const track =
+  jumpscareActive && stage === "bookTwo" ? null : ...
