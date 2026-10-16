@@ -43,17 +43,28 @@ export const entries: FlipEntry[] = [
 ];
 
 // Second book — one full, uncropped image per page.
-export const entriesTwo: FlipEntry[] = Array.from({ length: 20 }, (_, i) => {
-  const num = String(i + 1).padStart(2, "0");
-  const ext = i === 16 ? "jpg" : "png"; // firsts-17 is the only .jpg
-  return {
-    date: "",
-    title: "",
-    body: "",
-    images: [`/assets/book2/firsts-${num}.${ext}`],
-    imageCaptions: [undefined],
-  };
-});
+export const entriesTwo: FlipEntry[] = [
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-01.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-02.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-03.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-04.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-05.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-06.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-07.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-08.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-09.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-10.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-11.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-12.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-13.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-14.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-15.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-16.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-17.jpg"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-18.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-19.png"], imageCaption: "ABCD" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-20.png"], imageCaption: "ABCD" },
+];
 
 // Cover placeholders — edit these later.
 export const cover: FlipCover = {
@@ -427,7 +438,7 @@ function Page({
         images.length <= 1 ? (
           <div className="relative mt-4 flex flex-1 items-center justify-center">
             <div className="w-full">
-              <PhotoFrame src={images[0]} caption={captions[0]} contain />
+              <PhotoFrame src={images[0]} caption={captions[0] ?? entry.imageCaption} contain />
             </div>
           </div>
         ) : kawaii ? (
