@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { CornerFiligree, OrnateRule, Sigil } from "@/components/Ornament";
 import { Embers } from "@/components/Embers";
 import { Scatter } from "@/components/Scatter";
@@ -191,6 +192,79 @@ export const coverThree: FlipCover = {
   image: "/assets/book3/cover.png",
 };
 
+function Lightbox({
+  src,
+  alt,
+  onClose,
+}: {
+  src: string;
+  alt: string;
+  onClose: () => void;
+}) {
+  const [zoomed, setZoomed] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      // keep the arrow keys from turning book pages behind the picture
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") e.stopPropagation();
+    };
+    window.addEventListener("keydown", onKey, true);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey, true);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Enlarged image"
+      className="fixed inset-0 z-[100] bg-black/90"
+    >
+      <div className="absolute inset-0 overflow-auto overscroll-contain">
+        <div
+          className="flex min-h-full min-w-full p-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) onClose();
+          }}
+        >
+          <img
+            src={src}
+            alt={alt}
+            draggable={false}
+            onClick={() => setZoomed((z) => !z)}
+            className={
+              "m-auto " +
+              (zoomed
+                ? "w-[220%] max-w-none cursor-zoom-out"
+                : "max-h-[85dvh] max-w-full cursor-zoom-in object-contain")
+            }
+          />
+        </div>
+      </div>
+      <button
+        ref={closeRef}
+        type="button"
+        onClick={onClose}
+        aria-label="Close"
+        className="absolute right-3 top-3 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/60 bg-black/60 text-lg text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+      >
+        ✕
+      </button>
+      <p className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs text-white/70">
+        {zoomed ? "Tap to zoom out" : "Tap the image to zoom in"}
+      </p>
+    </div>,
+    document.body,
+  );
+}
+
 function PhotoFrame({
   src,
   caption,
@@ -198,6 +272,7 @@ function PhotoFrame({
   tilt = 0,
   kawaii = false,
   contain = false,
+  zoomable = false,
 }: {
   src?: string | undefined;
   caption?: string | undefined;
@@ -206,7 +281,33 @@ function PhotoFrame({
   kawaii?: boolean;
   /** Show the whole image without cropping, instead of filling a fixed box. */
   contain?: boolean;
+  /** Tap the image to open it full-screen with zoom. */
+  zoomable?: boolean;
 }) {
+  const [open, setOpen] = useState(false);
+  const close = useCallback(() => setOpen(false), []);
+
+  const img = src ? (
+    <img
+      src={src}
+      alt={caption ?? ""}
+      loading="lazy"
+      className={
+        (contain || kawaii
+          ? "h-auto max-h-[65vh] w-auto max-w-full object-contain"
+          : "h-full w-full object-cover") +
+        " transition-[filter] duration-700 " +
+        (kawaii
+          ? "[filter:saturate(1.1)]"
+          : "[filter:grayscale(1)_contrast(1.15)] group-hover:[filter:grayscale(0.35)_contrast(1.05)]")
+      }
+    />
+  ) : (
+    <span className="text-carved px-2 text-center text-[0.5rem] text-parchment-ink/50">
+      photograph
+    </span>
+  );
+
   return (
     <figure className="animate-drift-in group flex w-full min-w-0 flex-col">
       <div
@@ -229,25 +330,17 @@ function PhotoFrame({
             (kawaii ? " rounded-[1.35rem]" : "")
           }
         >
-          {src ? (
-            <img
-              src={src}
-              alt={caption ?? ""}
-              loading="lazy"
-              className={
-                (contain || kawaii
-                  ? "h-auto max-h-[65vh] w-auto max-w-full object-contain"
-                  : "h-full w-full object-cover") +
-                " transition-[filter] duration-700 " +
-                (kawaii
-                  ? "[filter:saturate(1.1)]"
-                  : "[filter:grayscale(1)_contrast(1.15)] group-hover:[filter:grayscale(0.35)_contrast(1.05)]")
-              }
-            />
+          {src && zoomable ? (
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label={caption ? `Enlarge image: ${caption}` : "Enlarge image"}
+              className="flex max-w-full cursor-zoom-in items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+            >
+              {img}
+            </button>
           ) : (
-            <span className="text-carved px-2 text-center text-[0.5rem] text-parchment-ink/50">
-              photograph
-            </span>
+            img
           )}
         </div>
       </div>
@@ -260,6 +353,9 @@ function PhotoFrame({
         >
           {caption}
         </figcaption>
+      ) : null}
+      {open && src ? (
+        <Lightbox src={src} alt={caption ?? "Enlarged image"} onClose={close} />
       ) : null}
     </figure>
   );
@@ -438,7 +534,7 @@ function Page({
         images.length <= 1 ? (
           <div className="relative mt-4 flex flex-1 items-center justify-center">
             <div className="w-full">
-              <PhotoFrame src={images[0]} caption={captions[0] ?? entry.imageCaption} contain />
+              <PhotoFrame src={images[0]} caption={captions[0] ?? entry.imageCaption} contain zoomable />
             </div>
           </div>
         ) : kawaii ? (
