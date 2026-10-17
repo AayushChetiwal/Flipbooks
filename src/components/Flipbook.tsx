@@ -337,7 +337,7 @@ function PhotoFrame({
       {caption ? (
         <figcaption
           className={
-            "mt-2 text-center italic text-parchment-ink/65 " +
+            "mt-2 text-center font-medium italic text-parchment-ink "  +
             (compact ? "text-[0.6rem]" : "text-xs")
           }
         >
