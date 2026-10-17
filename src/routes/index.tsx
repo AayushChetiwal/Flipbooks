@@ -41,14 +41,14 @@ function Index() {
   const [stage, setStage] = useState<Stage>("gate");
   const [jumpscareActive, setJumpscareActive] = useState(false);
 
-  const track = jumpscareActive
+  const track =
+  jumpscareActive && stage === "bookTwo"
     ? null
     : stage === "bookTwo"
       ? GOTHIC_TRACK
       : stage === "bookThree" || stage === "finale"
         ? KAWAII_TRACK
         : null;
-
   return (
     <main className="min-h-screen bg-background">
       <BackgroundMusic videoId={track} />

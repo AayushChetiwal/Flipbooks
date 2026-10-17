@@ -55,6 +55,7 @@ export const entriesTwo: FlipEntry[] = [
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-09.png"], imageCaption: "First Comical Lore Drop-3" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-07.png"], imageCaption: "First Comical Lore Drop-4" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-11.png"], imageCaption: "Finding out you liekd metal too" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-19.png"], imageCaption: "How you found metal" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-12.png"], imageCaption: "First music recs" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-13.png"], imageCaption: "First note reply" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-14.png"], imageCaption: "First post you sent" },
@@ -62,7 +63,6 @@ export const entriesTwo: FlipEntry[] = [
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-16.png"], imageCaption: "First reel you sent dawg wtf" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-17.jpg"], imageCaption: "First ss you sent" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-18.png"], imageCaption: "First time i wronged you :c" },
-  { date: "", title: "", body: "", images: ["/assets/book2/firsts-19.png"], imageCaption: "How you found metal" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-20.png"], imageCaption: "ABCD" },
 ];
 
