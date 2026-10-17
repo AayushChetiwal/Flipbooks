@@ -201,7 +201,6 @@ function Lightbox({
   alt: string;
   onClose: () => void;
 }) {
-  const [zoomed, setZoomed] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -238,13 +237,7 @@ function Lightbox({
             src={src}
             alt={alt}
             draggable={false}
-            onClick={() => setZoomed((z) => !z)}
-            className={
-              "m-auto " +
-              (zoomed
-                ? "w-[220%] max-w-none cursor-zoom-out"
-                : "max-h-[85dvh] max-w-full cursor-zoom-in object-contain")
-            }
+            className="m-auto max-h-[85dvh] max-w-full object-contain"
           />
         </div>
       </div>
@@ -257,9 +250,6 @@ function Lightbox({
       >
         ✕
       </button>
-      <p className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs text-white/70">
-        {zoomed ? "Tap to zoom out" : "Tap the image to zoom in"}
-      </p>
     </div>,
     document.body,
   );
