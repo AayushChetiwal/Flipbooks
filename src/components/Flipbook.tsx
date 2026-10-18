@@ -66,6 +66,7 @@ export const entriesTwo: FlipEntry[] = [
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-18.png"], imageCaption: "First time i wronged you :c" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-21.png"], imageCaption: "First place we went to together" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-22.png"], imageCaption: "First time we talked on call" },
+    { date: "", title: "", body: "", images: ["/assets/book2/firsts-22.png"], imageCaption: "Placeholder" },
 ];
 
 // Cover placeholders — edit these later.
