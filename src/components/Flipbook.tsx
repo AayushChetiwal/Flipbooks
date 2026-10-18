@@ -83,7 +83,7 @@ export const coverTwo: FlipCover = {
 };
 
 export const jumpscareTwo: JumpscareConfig = {
-  pageIndex: 19,
+  pageIndex: entriesTwo.length - 1,
   image: "/assets/book2/jumpscare.png",
   caption:
     "Madhzeepoour da munna dharampal yadav jumpscare 🥶🥶🥶🥶🥶🥶🥶🥶🥶1!!!!111!1!!!1",
@@ -361,13 +361,6 @@ function JumpscareOverlay({
 }) {
   return (
     <div className="animate-jumpscare-in absolute inset-0 z-30 flex flex-col items-center justify-between overflow-hidden bg-black p-4 text-center">
-      <iframe
-        aria-hidden="true"
-        title="jumpscare-audio"
-        className="pointer-events-none absolute h-px w-px opacity-0"
-        src={`https://www.youtube.com/embed/${config.videoId}?autoplay=1&playsinline=1`}
-        allow="autoplay"
-      />
       <img
         src={config.image}
         alt="jumpscare"
@@ -724,6 +717,36 @@ export function Flipbook({
     onJumpscareChange?.(jumpscareShowing);
   }, [jumpscareShowing, onJumpscareChange]);
 
+  // The jumpscare sound is a hidden YouTube player. Loading it only when the
+  // scare appears is slow on phones, so load it (paused) two pages early and
+  // just press play at the right moment.
+  const scareFrame = useRef<HTMLIFrameElement>(null);
+  const preloadScare =
+    !!jumpscare &&
+    !jumpscareDismissed &&
+    spread >= jumpscareSpread - 2 &&
+    spread <= jumpscareSpread;
+
+  useEffect(() => {
+    const send = (func: string) =>
+      scareFrame.current?.contentWindow?.postMessage(
+        JSON.stringify({ event: "command", func, args: [] }),
+        "*",
+      );
+    if (!jumpscareShowing) {
+      send("pauseVideo");
+      return;
+    }
+    send("playVideo");
+    // retry in case the player was still starting up
+    const t1 = window.setTimeout(() => send("playVideo"), 400);
+    const t2 = window.setTimeout(() => send("playVideo"), 1200);
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, [jumpscareShowing]);
+
   const atEnd = spread === spreadCount - 1;
   const jumpscareIsFinalPage =
     !!jumpscare && jumpscare.pageIndex === pages.length - 1;
@@ -784,6 +807,17 @@ export function Flipbook({
         count={kawaii ? 14 : soft ? 16 : 20}
       />
       <Embers soft={soft} kawaii={kawaii} />
+
+      {jumpscare && preloadScare ? (
+        <iframe
+          ref={scareFrame}
+          aria-hidden="true"
+          title="jumpscare-audio"
+          className="pointer-events-none absolute h-px w-px opacity-0"
+          src={`https://www.youtube.com/embed/${jumpscare.videoId}?enablejsapi=1&playsinline=1&controls=0`}
+          allow="autoplay"
+        />
+      ) : null}
 
 
       <header className="animate-drift-in relative mx-auto max-w-3xl text-center">
