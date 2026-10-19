@@ -45,11 +45,7 @@ export const entries: FlipEntry[] = [
 
 // Second book — one full, uncropped image per page.
 export const entriesTwo: FlipEntry[] = [
-  { date: "", title: "", body: "", images: ["/assets/book2/firsts-01.png"], imageCaption: "Random Moment 1" },
-  { date: "", title: "", body: "", images: ["/assets/book2/firsts-02.png"], imageCaption: "Random Moment 2" },
-  { date: "", title: "", body: "", images: ["/assets/book2/firsts-03.png"], imageCaption: "𝓯𝓻𝓮𝓪𝓴𝔂" },
-  { date: "", title: "", body: "", images: ["/assets/book2/firsts-04.png"], imageCaption: "𝓯𝓻𝓮𝓪𝓴𝔂 2" },
-  { date: "", title: "", body: "", images: ["/assets/book2/firsts-05.png"], imageCaption: "Random Reel" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-23.png"], imageCaption: "First message you sent me" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-06.png"], imageCaption: "First Serious Lore Drop" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-10.png"], imageCaption: "First Comical Lore Drop-1" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-08.png"], imageCaption: "First Comical Lore Drop-2" },
@@ -65,8 +61,13 @@ export const entriesTwo: FlipEntry[] = [
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-17.jpg"], imageCaption: "First ss you sent" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-18.png"], imageCaption: "First time i wronged you :c" },
   { date: "", title: "", body: "", images: ["/assets/book2/firsts-21.png"], imageCaption: "First place we went to together" },
-  { date: "", title: "", body: "", images: ["/assets/book2/firsts-22.png"], imageCaption: "First time we talked on call" },
-    { date: "", title: "", body: "", images: ["/assets/book2/firsts-22.png"], imageCaption: "Placeholder" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-22.png"], imageCaption: "First time we talked on call" }
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-01.png"], imageCaption: "Random Moment 1" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-02.png"], imageCaption: "Random Moment 2" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-03.png"], imageCaption: "𝓯𝓻𝓮𝓪𝓴𝔂" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-04.png"], imageCaption: "𝓯𝓻𝓮𝓪𝓴𝔂 2" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-05.png"], imageCaption: "Random Reel" },
+  { date: "", title: "", body: "", images: ["/assets/book2/firsts-22.png"], imageCaption: "Placeholder" }
 ];
 
 // Cover placeholders — edit these later.
