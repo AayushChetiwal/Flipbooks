@@ -88,7 +88,7 @@ function Index() {
         <EndingScreen
           message="Well I hope you enjoyed what I whipped up in a month with my crappy webdev skills!! ...thanks for sticking till the end :DDD!!!."
           buttonLabel="..Or....is it really the end?.."
-          redirectUrl="https://transience.vercel.app"
+          redirectUrl="https://www.youtube.com/watch?v=90vkulvZCCg&list=RD90vkulvZCCg&start_radio=1"
           soundVideoId={LIGHTS_OFF_SOUND}
         />
       )}
